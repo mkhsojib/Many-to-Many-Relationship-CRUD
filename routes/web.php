@@ -27,3 +27,15 @@ Route::get('/create', function () {
     $user->roles()->save(new Role(['name' => 'administrator']));
 
 });
+
+
+Route::get('/read', function (){
+
+   $user = User::findOrFail(1);
+
+   foreach ($user->roles as $role){
+
+       echo $role->name;
+   }
+
+});
