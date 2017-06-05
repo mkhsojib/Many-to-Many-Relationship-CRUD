@@ -29,13 +29,35 @@ Route::get('/create', function () {
 });
 
 
-Route::get('/read', function (){
+Route::get('/read', function () {
 
-   $user = User::findOrFail(1);
+    $user = User::findOrFail(1);
 
-   foreach ($user->roles as $role){
+    foreach ($user->roles as $role) {
 
-       echo $role->name;
-   }
+        echo $role->name;
+    }
+
+});
+
+
+Route::get('/update', function () {
+
+    $user = User::findOrFail(1);
+
+    if ($user->has('roles')) {
+
+        foreach ($user->roles as $role) {
+
+
+            if ($role->name == 'Administrator') {
+
+                $role->name = 'subscriber';
+                $role->save();
+            }
+        }
+
+    }
+
 
 });
